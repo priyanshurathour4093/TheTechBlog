@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Add New Blog</title>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-3">
+      <form action="/blog" method="post" enctype="multipart/form-data">
+        
+        <!-- Cover Image -->
+        <div class="mb-3">
+          <label for="coverImage" class="form-label">Cover Image</label>
+          <input
+            type="file"
+            class="form-control"
+            id="coverImage"
+            name="coverImage"
+          />
+        </div>
+
+        <!-- Title -->
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            required
+          />
+        </div>
+
+        <!-- Category -->
+        <div class="mb-3">
+          <label for="category" class="form-label">Category</label>
+          <select class="form-control" id="category" name="category">
+            <option value="">Select a category</option>
+            <option value="Web Development">Web Development</option>
+            <option value="AI">AI</option>
+            <option value="Machine Learning">Machine Learning</option>
+            <option value="Cyber Security">Cyber Security</option>
+            <option value="Cloud">Cloud</option>
+            <option value="Blockchain">Blockchain</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <!-- Tags -->
+        <div class="mb-3">
+          <label for="tags" class="form-label">Tech Stack Tags (comma separated)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tags"
+            name="tags"
+            placeholder="React, Node.js, MongoDB"
+          />
+        </div>
+
+        <!-- GitHub Link -->
+        <div class="mb-3">
+          <label for="github" class="form-label">GitHub Link</label>
+          <input
+            type="url"
+            class="form-control"
+            id="github"
+            name="github"
+            placeholder="https://github.com/user/repo"
+          />
+        </div>
+
+        <!-- Live Demo Link -->
+        <div class="mb-3">
+          <label for="demo" class="form-label">Live Demo Link</label>
+          <input
+            type="url"
+            class="form-control"
+            id="demo"
+            name="demo"
+            placeholder="https://example.com"
+          />
+        </div>
+
+        <!-- Body -->
+        <div class="mb-3">
+          <label for="body" class="form-label">Body</label>
+          <textarea
+            name="body"
+            class="form-control"
+            id="body"
+            rows="6"
+            required
+          ></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mb-3">
+          <button class="btn btn-primary">Submit</button>
+        </div>
+
+      </form>
+    </div>
+
+    <%- include('./partials/scripts') %>
+  </body>
+</html>

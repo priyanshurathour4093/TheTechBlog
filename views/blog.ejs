@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title><%= blog.title %></title>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-4">
+      <!-- Blog Title -->
+      <h1><%= blog.title %></h1>
+
+      <!-- Category -->
+      <% if (blog.category) { %>
+        <p><strong>Category:</strong> <%= blog.category %></p>
+      <% } %>
+
+      <!-- Tags -->
+      <% if (blog.tags && blog.tags.length) { %>
+        <p>
+          <strong>Tags:</strong>
+          <% blog.tags.forEach(tag => { %>
+            <span class="badge bg-secondary me-1"><%= tag %></span>
+          <% }) %>
+        </p>
+      <% } %>
+
+      <!-- Cover Image + Blog Body Side by Side -->
+<div class="container mt-4 d-flex flex-wrap">
+  <!-- Left Column: Cover Image -->
+  <% if (blog.coverImageURL) { %>
+    <div style="flex: 1; min-width: 300px; max-width: 50%;">
+      <img src="<%= blog.coverImageURL %>" alt="Cover Image" class="img-fluid" />
+    </div>
+  <% } %>
+
+  <!-- Right Column: Blog Body -->
+  <div style="flex: 1; min-width: 300px; max-width: 50%; padding-left: 20px;">
+    <div style="white-space: pre-wrap; overflow-wrap: break-word; line-height: 1.6;">
+      <%= blog.body %>
+    </div>
+  </div>
+</div>
+
+
+      <!-- Project Links -->
+      <% if (blog.links && (blog.links.github || blog.links.demo)) { %>
+        <div class="mt-3">
+          <% if (blog.links.github) { %>
+            <p><strong>GitHub:</strong> <a href="<%= blog.links.github %>" target="_blank"><%= blog.links.github %></a></p>
+          <% } %>
+          <% if (blog.links.demo) { %>
+            <p><strong>Live Demo:</strong> <a href="<%= blog.links.demo %>" target="_blank"><%= blog.links.demo %></a></p>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
+
+    <!-- Author Info -->
+    <div class="container mt-4 d-flex align-items-center">
+      <img src="<%= blog.profileImageURL %>" width="50px" class="rounded-circle me-2" />
+      <strong><%= blog.createdBy.fullName %></strong>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="container mt-3">
+      <h1>Comments (<%= comments.length %>)</h1>
+
+      <!-- Add Comment Form -->
+      <% if (locals.user) { %>
+        <form action="/blog/comment/<%= blog._id %>" method="post" class="mb-3">
+          <div class="input-group">
+            <input
+              type="text"
+              name="content"
+              class="form-control"
+              placeholder="Enter your comment"
+              required
+            />
+            <button class="btn btn-sm btn-primary" type="submit">Add</button>
+          </div>
+        </form>
+      <% } %>
+
+      <!-- Display Comments -->
+      <div class="mt-3">
+        <% comments.forEach(comment => { %>
+          <div class="d-flex align-items-start mb-2">
+            <img src="<%= comment.profileImageURL %>" width="40px" class="rounded-circle me-2" />
+            <div>
+              <strong><%= comment.createdBy.fullName %></strong>
+              <pre><%= comment.content %></pre>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <%- include('./partials/scripts') %>
+  </body>
+</html>
